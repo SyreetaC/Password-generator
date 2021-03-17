@@ -68,8 +68,8 @@ let isUpperCase;
 let isNumbers;
 let isSpecial;
 
-//pushing arrays from options array.
-const arrays = () => {
+//pushing getOptionsArray from options array.
+const getOptionsArray = () => {
   if (isLowerCase) {
     optionsArray.push(lowercaseArray);
   }
@@ -87,7 +87,7 @@ const arrays = () => {
 };
 
 //for loop to go through options array
-const collectPassword = (arrays) => {
+const collectPassword = (getOptionsArray) => {
   const passwordArray = [];
   for (let i = 0; i < passwordLength; i++) {
     const characters = passwordArray.push(characters);
@@ -96,13 +96,14 @@ const collectPassword = (arrays) => {
 };
 
 //choosing random characters
-const getCharacters = (arrays) => {
-  const characters = arrays[Math.floor(Math.random() * arrays.length)];
+const getCharacters = (getOptionsArray) => {
+  const characters =
+    getOptionsArray[Math.floor(Math.random() * getOptionsArray.length)];
   return getCharacters;
 };
 
 const generatePassword = function () {
-  var password = "";
+  let password = "";
   let passwordLength = prompt("What length do you want your password to be?");
   // Validates the length of the password.
   if (passwordLength >= 8 && passwordLength <= 128) {
@@ -130,7 +131,8 @@ const generatePassword = function () {
     isNumbers = confirm("Do you want to include any numbers?");
     console.log(isNumbers);
   }
-  arrays();
+
+  console.log("Hello");
 };
 
 // return password;
