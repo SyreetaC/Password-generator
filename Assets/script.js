@@ -63,13 +63,14 @@ const numbersArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 let optionsArray = [];
 
+let passwordLength;
 let isLowerCase;
 let isUpperCase;
 let isNumbers;
 let isSpecial;
 
 //pushing getOptionsArray from options array.
-const getOptionsArray = () => {
+function getOptionsArray() {
   if (isLowerCase) {
     optionsArray.push(lowercaseArray);
   }
@@ -84,23 +85,23 @@ const getOptionsArray = () => {
   }
   console.log(optionsArray);
   return optionsArray;
-};
+}
 
 //for loop to go through options array
-const collectPassword = (getOptionsArray) => {
+function collectPassword() {
   const passwordArray = [];
   for (let i = 0; i < passwordLength; i++) {
     const characters = passwordArray.push(characters);
   }
   return collectPassword;
-};
+}
 
 //choosing random characters
-const getCharacters = (getOptionsArray) => {
+function getCharacters() {
   const characters =
     getOptionsArray[Math.floor(Math.random() * getOptionsArray.length)];
   return getCharacters;
-};
+}
 
 const generatePassword = function () {
   let password = "";
@@ -131,8 +132,12 @@ const generatePassword = function () {
     isNumbers = confirm("Do you want to include any numbers?");
     console.log(isNumbers);
   }
+  // getOptionsArray();
+  // collectPassword();
+  // getCharacters();
 
-  console.log("Hello");
+  console.log(password);
+  return password;
 };
 
 // return password;
@@ -143,6 +148,7 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
+  return password;
 }
 
 // Add event listener to generate button
