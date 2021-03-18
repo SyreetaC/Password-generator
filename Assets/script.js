@@ -61,18 +61,15 @@ const specialCharactersArray = ["/", "^", "?", "!", "*", "+", "-", "."];
 
 const numbersArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
-let optionsArray = [];
-
 let passwordLength;
 let isLowerCase;
 let isUpperCase;
 let isNumbers;
 let isSpecial;
 
-let password = [];
-
 //pushing getOptionsArray from options array.
 function getOptionsArray() {
+  const optionsArray = [];
   if (isLowerCase) {
     optionsArray.push(lowercaseArray);
   }
@@ -85,66 +82,71 @@ function getOptionsArray() {
   if (isSpecial) {
     optionsArray.push(specialCharactersArray);
   }
-  console.log(optionsArray);
   return optionsArray;
 }
 
 //for loop to go through options array
-function collectPassword() {
+function collectPassword(optionsArray) {
   const passwordArray = [];
   for (let i = 0; i < passwordLength; i++) {
-    const characters = passwordArray.push(characters);
+    // get random choice
+    const choiceArray = getRandomChoiceArray(optionsArray);
+    console.log(choiceArray);
+    // get random character from random choice array
+    const character = getRandomCharacterFromChoiceArray(choiceArray);
+
+    passwordArray.push(character);
   }
+  return passwordArray;
+}
+
+function getRandomChoiceArray(optionsArray) {
+  const randomChoiceIndex = Math.floor(Math.random() * optionsArray.length);
+
+  return optionsArray[randomChoiceIndex];
 }
 
 //choosing random characters
-function getCharacters() {
-  const characters =
-    getOptionsArray[Math.floor(Math.random() * getOptionsArray.length)];
-  return getCharacters;
+function getRandomCharacterFromChoiceArray(choiceArray) {
+  const randomIndex = Math.floor(Math.random() * choiceArray.length);
+  return choiceArray[randomIndex];
+}
+
+function confirmChoices() {
+  isSpecial = confirm("Do you want to include any special characters?");
+  console.log(isSpecial);
+
+  isUpperCase = confirm("Do you want to include any upper case characters?");
+  console.log(isUpperCase);
+
+  isLowerCase = confirm("Do you want to include any lower case characters?");
+  console.log(isLowerCase);
+
+  isNumbers = confirm("Do you want to include any numbers?");
+  console.log(isNumbers);
 }
 
 const generatePassword = function () {
-  let password = "";
-  let passwordLength = prompt("What length do you want your password to be?");
+  passwordLength = prompt("What length do you want your password to be?");
   // Validates the length of the password.
+  console.log(typeof passwordLength);
+  passwordLength = parseInt(passwordLength, 10);
+  console.log(typeof passwordLength);
   if (passwordLength >= 8 && passwordLength <= 128) {
-    console.log(typeof passwordLength);
-    passwordLength = parseInt(passwordLength, 10);
-    console.log(typeof passwordLength);
-    passwordLength;
     // Confirms for character types.
-    if (passwordLength) {
-      isSpecial = confirm("Do you want to include any special characters?");
-      console.log(isSpecial);
 
-      isUpperCase = confirm(
-        "Do you want to include any upper case characters?"
-      );
-      console.log(isUpperCase);
+    confirmChoices();
 
-      isLowerCase = confirm(
-        "Do you want to include any lower case characters?"
-      );
-      console.log(isLowerCase);
+    const optionsArray = getOptionsArray();
 
-      isNumbers = confirm("Do you want to include any numbers?");
-      console.log(isNumbers);
-    }
+    const passwordArray = collectPassword(optionsArray);
 
-    getOptionsArray();
-    console.log("hello");
+    console.log(passwordArray);
 
-    //alert for character numbers
+    return passwordArray.join("");
   } else {
-    const tryAgain = alert("Choose a length between 8 and 128 characters.");
+    alert("Choose a length between 8 and 128 characters.");
   }
-
-  // getOptionsArray();
-  // collectPassword();
-  // getCharacters();
-
-  // console.log(password);
 };
 
 // return password;
